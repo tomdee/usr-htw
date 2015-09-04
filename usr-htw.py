@@ -30,4 +30,5 @@ while True:
           temp = -1.0* temp
       
       print("Temp: %s Humidity: %s" % (temp, humidity))
-      subprocess.call("curl -sS -i -XPOST 'http://influxdb:8086/write?db=tomdee' --data-binary 'environment,room=bedroom,location=vicksburg temperature=%s,humidity=%s'" % (temp, humidity), shell=True)
+      subprocess.call("curl -sS -i -XPOST 'http://influxdb:8086/write?db=tomdee' --data-binary 'temperature,room=bedroom,location=vicksburg value=%s'" % temp), shell=True)
+      subprocess.call("curl -sS -i -XPOST 'http://influxdb:8086/write?db=tomdee' --data-binary 'humidity,room=bedroom,location=vicksburg value=%s'" % humidity, shell=True)
