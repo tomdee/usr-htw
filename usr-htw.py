@@ -1,6 +1,6 @@
 import socket
 import sys 
-
+import subprocess
 TCP_ADDR = sys.argv[1]
 TCP_PORT = 8899
  
@@ -30,3 +30,4 @@ while True:
           temp = -1.0* temp
       
       print("Temp: %s Humidity: %s" % (temp, humidity))
+      subprocess.call("curl -sS -i -XPOST 'http://influxdb:8086/write?db=tomdee' --data-binary 'environment,room=bedroom,location=vicksburg temperature=%s,humidity=%s'" % (temp, humidity), shell=True)
